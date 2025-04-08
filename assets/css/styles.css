@@ -2498,8 +2498,9 @@ textarea.form-control {
     font-size: 0.8rem;
     cursor: pointer;
     transition: all 0.3s ease;
+    width: 100%;
+    text-align: center;
     position: relative;
-    overflow: hidden;
 }
 
 .contact-form .btn:hover {
@@ -2512,11 +2513,9 @@ textarea.form-control {
     box-shadow: 0 2px 0 var(--secondary);
 }
 
+/* Remove the ::before pseudo-element that's causing problems */
 .contact-form .btn::before {
-    content: '▶';
-    margin-right: 0.5rem;
-    display: inline-block;
-    animation: blink 1s infinite;
+    content: none;
 }
 
 /* Add some pixel art decorations */
