@@ -6,6 +6,87 @@
     <title>Jemin Joseph - Retro Game Developer</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/styles.css">
+    <style>
+        /* Ensure power-fill shows properly */
+        .power-meter {
+            position: relative;
+            height: 12px;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--secondary);
+            margin: 8px 0;
+            overflow: hidden;
+        }
+        
+        .power-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(to right, var(--secondary), var(--accent));
+            box-shadow: 0 0 8px var(--accent);
+            display: block !important;
+            visibility: visible !important;
+        }
+        
+        /* Add animation class */
+        .power-fill-animate {
+            animation: fillPower 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67) forwards;
+        }
+        
+        @keyframes fillPower {
+            from { width: 0%; }
+            to { width: 85%; }
+        }
+        
+        /* Form validation styles */
+        .validation-highlight {
+            border-color: #ff6b6b !important;
+            box-shadow: 0 0 5px #ff6b6b !important;
+        }
+        
+        .error-shake {
+            animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+            perspective: 1000px;
+            border-color: #ff6b6b !important;
+        }
+        
+        @keyframes shake {
+            10%, 90% {
+                transform: translate3d(-1px, 0, 0);
+            }
+            
+            20%, 80% {
+                transform: translate3d(2px, 0, 0);
+            }
+            
+            30%, 50%, 70% {
+                transform: translate3d(-4px, 0, 0);
+            }
+            
+            40%, 60% {
+                transform: translate3d(4px, 0, 0);
+            }
+        }
+        
+        /* Button animation */
+        .flash-animation {
+            animation: button-flash 0.3s ease-out;
+        }
+        
+        @keyframes button-flash {
+            0% { 
+                background-color: var(--accent);
+                color: #000;
+                transform: scale(1.05);
+            }
+            100% { 
+                background-color: initial;
+                color: initial;
+                transform: scale(1);
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="scanlines"></div>
@@ -403,7 +484,6 @@
                             <div class="xp-fill"></div>
                         </div>
                         <div class="player-level">LEVEL 2 - SOFTWARE DEVELOPER</div>
-                        <button id="refresh-xp" onclick="updateXpProgress(); return false;" class="pixel-border refresh-button">REFRESH XP</button>
                     </div>
                 </div>
             </div>
@@ -460,23 +540,23 @@
                     <div class="power-level">
                         <div class="power-label">RESPONSE TIME</div>
                         <div class="power-meter">
-                            <div class="power-fill" style="width: 85%;"></div>
+                            <div class="power-fill" data-target-width="85"></div>
                         </div>
                         <div class="power-value">QUICK</div>
                     </div>
                 </div>
                 
-                <form class="contact-form">
+                <form class="contact-form" id="contact-form">
                     <div class="form-group">
-                        <input type="text" class="form-control" placeholder="YOUR NAME" required>
+                        <input type="text" class="form-control" id="name-input" placeholder="YOUR NAME" required>
                     </div>
                     <div class="form-group">
-                        <input type="email" class="form-control" placeholder="YOUR EMAIL" required>
+                        <input type="email" class="form-control" id="email-input" placeholder="YOUR EMAIL" required>
                     </div>
                     <div class="form-group">
-                        <textarea class="form-control" placeholder="YOUR MESSAGE" required></textarea>
+                        <textarea class="form-control" id="message-input" placeholder="YOUR MESSAGE" required></textarea>
                     </div>
-                    <button type="submit" class="btn">▶&nbsp; SEND MESSAGE</button>
+                    <button type="button" id="send-email-btn" class="btn">▶&nbsp; SEND MESSAGE</button>
                 </form>
             </div>
         </div>

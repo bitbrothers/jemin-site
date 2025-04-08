@@ -51,6 +51,9 @@ document.addEventListener('DOMContentLoaded', function() {
     // Fix hero buttons to ensure they're clickable
     fixHeroButtons();
     
+    // Set up contact form email handler
+    setupContactEmailHandler();
+    
     // Create scanlines effect for quest log screen
     const questLogScreen = document.querySelector('.quest-log-screen');
     if (questLogScreen) {
@@ -66,13 +69,17 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(updateXpProgress, 1000);
     setTimeout(updateXpProgress, 2000);
     
+    // Initialize response time power meter with multiple attempts for reliability
+    setTimeout(initResponseTimePowerMeter, 200);
+    setTimeout(initResponseTimePowerMeter, 500);
+    setTimeout(initResponseTimePowerMeter, 1000);
+    setTimeout(initResponseTimePowerMeter, 2000);
+    
     // Also initialize when user interacts with the page
     document.addEventListener('click', function() {
         setTimeout(updateXpProgress, 100);
+        setTimeout(initResponseTimePowerMeter, 100);
     }, { once: true });
-    
-    // Setup refresh XP button interactivity
-    setupRefreshButton();
 });
 
 // Add sound toggle button
@@ -477,6 +484,13 @@ function setupNavigation() {
                         updateXpProgress();
                     }, 1000);
                 }
+                
+                // If we're navigating to the contact section, initialize the RESPONSE TIME meter
+                if (targetId === 'contact') {
+                    setTimeout(() => {
+                        initResponseTimePowerMeter();
+                    }, 1000);
+                }
             }
         });
         
@@ -502,6 +516,13 @@ function setupScrollAnimations() {
                 if (entry.target.id === 'experience') {
                     setTimeout(() => {
                         updateXpProgress();
+                    }, 500);
+                }
+                
+                // If the contact section comes into view, initialize the RESPONSE TIME meter
+                if (entry.target.id === 'contact') {
+                    setTimeout(() => {
+                        initResponseTimePowerMeter();
                     }, 500);
                 }
                 
@@ -1029,33 +1050,6 @@ function setupProjectCards() {
     });
 }
 
-// Setup refresh XP button interactivity
-function setupRefreshButton() {
-    const refreshButton = document.getElementById('refresh-xp');
-    if (refreshButton) {
-        refreshButton.addEventListener('mouseenter', () => {
-            playSound('hover');
-        });
-        
-        refreshButton.addEventListener('click', () => {
-            // Play sound effect
-            playSound('click');
-            
-            // Add a flash animation
-            refreshButton.classList.add('flash-animation');
-            setTimeout(() => {
-                refreshButton.classList.remove('flash-animation');
-            }, 500);
-            
-            // Update XP progress
-            updateXpProgress();
-            
-            // Return false to prevent default button behavior
-            return false;
-        });
-    }
-}
-
 // Setup character info section interactivity
 function setupCharacterInfo() {
     // Handle backstory toggle
@@ -1234,17 +1228,76 @@ function setupContactItemInteractions() {
         });
     });
     
-    // Animate power meter on load
-    const powerFill = document.querySelector('.power-fill');
-    if (powerFill) {
-        powerFill.style.width = '0%';
-        
-        setTimeout(() => {
-            powerFill.style.transition = 'width 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67)';
-            const targetWidth = powerFill.style.width.split('%')[0] || '85';
-            powerFill.style.width = targetWidth + '%';
-        }, 500);
+    // Initialize power meter with multiple attempts for reliability
+    initResponseTimePowerMeter();
+    
+    // Set up repeated attempts to initialize the power meter for a short period
+    for (let i = 1; i <= 5; i++) {
+        setTimeout(initResponseTimePowerMeter, i * 500);
     }
+    
+    // Also set up a mutation observer to detect if the contact section changes
+    const contactSection = document.getElementById('contact');
+    if (contactSection) {
+        const observer = new MutationObserver(() => {
+            initResponseTimePowerMeter();
+        });
+        
+        observer.observe(contactSection, { 
+            childList: true, 
+            subtree: true, 
+            attributes: true 
+        });
+    }
+}
+
+// Initialize and animate the RESPONSE TIME power meter
+function initResponseTimePowerMeter() {
+    const powerFill = document.querySelector('.power-fill');
+    if (!powerFill) return;
+    
+    console.log('Initializing response time power meter');
+    
+    // Get the target width from data attribute or default to 85
+    const targetWidth = powerFill.getAttribute('data-target-width') || '85';
+    
+    // Clear any existing inline styles that might interfere
+    powerFill.removeAttribute('style');
+    
+    // Try two different animation approaches for better browser compatibility
+    
+    // Approach 1: Direct style manipulation with transition
+    try {
+        // Reset width to 0 without transition first
+        powerFill.style.width = '0%';
+        powerFill.style.display = 'block';
+        powerFill.style.visibility = 'visible';
+        
+        // Force a reflow
+        powerFill.offsetHeight;
+        
+        // Now set the transition and trigger width change
+        powerFill.style.transition = 'width 1.5s cubic-bezier(0.17, 0.67, 0.83, 0.67)';
+        powerFill.style.width = targetWidth + '%';
+        
+        console.log('Style-based animation applied');
+    } catch (e) {
+        console.log('Style-based animation failed, trying CSS animation class');
+        
+        // Approach 2: CSS animation class as fallback
+        powerFill.classList.remove('power-fill-animate');
+        void powerFill.offsetWidth; // Force reflow
+        powerFill.classList.add('power-fill-animate');
+    }
+    
+    // Add additional safeguard - check if animation worked after a delay
+    setTimeout(() => {
+        if (parseFloat(getComputedStyle(powerFill).width) < 10) {
+            console.log('Animation may have failed, applying direct width');
+            powerFill.style.transition = 'none';
+            powerFill.style.width = targetWidth + '%';
+        }
+    }, 2000);
 }
 
 // Fix hero buttons to ensure they're clickable
@@ -1283,4 +1336,76 @@ function fixHeroButtons() {
             }
         });
     }
+}
+
+// Set up contact form email handler
+function setupContactEmailHandler() {
+    const sendEmailBtn = document.getElementById('send-email-btn');
+    if (sendEmailBtn) {
+        sendEmailBtn.addEventListener('click', function() {
+            // Play click sound
+            playSound('click');
+            
+            // Get form values
+            const nameInput = document.getElementById('name-input');
+            const emailInput = document.getElementById('email-input');
+            const messageInput = document.getElementById('message-input');
+            
+            // Validate form
+            if (!nameInput.value || !emailInput.value || !messageInput.value) {
+                // Show validation message with retro style
+                const formGroups = document.querySelectorAll('.form-group');
+                formGroups.forEach(group => {
+                    const input = group.querySelector('input, textarea');
+                    if (!input.value) {
+                        input.classList.add('error-shake');
+                        setTimeout(() => {
+                            input.classList.remove('error-shake');
+                        }, 500);
+                    }
+                });
+                return;
+            }
+            
+            // Prepare mailto link - using Jemin's actual email from the page
+            const recipientEmail = document.querySelector('.email-value').textContent.trim();
+            const subject = `Message from ${encodeURIComponent(nameInput.value)} via Retro Portfolio`;
+            const body = `Name: ${encodeURIComponent(nameInput.value)}\n`
+                       + `Email: ${encodeURIComponent(emailInput.value)}\n\n`
+                       + `Message:\n${encodeURIComponent(messageInput.value)}`;
+                       
+            // Create mailto URL
+            const mailtoUrl = `mailto:${recipientEmail}?subject=${subject}&body=${body}`;
+            
+            // Add visual feedback before opening email client
+            sendEmailBtn.classList.add('flash-animation');
+            setTimeout(() => {
+                sendEmailBtn.classList.remove('flash-animation');
+                
+                // Open default email client
+                window.location.href = mailtoUrl;
+            }, 300);
+        });
+        
+        // Add hover sound effect
+        sendEmailBtn.addEventListener('mouseenter', () => {
+            playSound('hover');
+        });
+    }
+    
+    // Also validate form inputs with retro style feedback
+    const formInputs = document.querySelectorAll('#contact-form input, #contact-form textarea');
+    formInputs.forEach(input => {
+        input.addEventListener('blur', function() {
+            if (!this.value && this.required) {
+                this.classList.add('validation-highlight');
+            } else {
+                this.classList.remove('validation-highlight');
+            }
+        });
+        
+        input.addEventListener('focus', function() {
+            this.classList.remove('validation-highlight');
+        });
+    });
 }
