@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jemin Joseph - Retro Game Developer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+    <div class="scanlines"></div>
+    <div class="crt-overlay"></div>
+    
+    <header id="header" class="fixed-header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <h1 class="pixel-text">JEMIN JOSEPH</h1>
+                </div>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#about">ABOUT</a></li>
+                        <li><a href="#projects">PROJECTS</a></li>
+                        <li><a href="#experience">EXPERIENCE</a></li>
+                        <li><a href="#contact">CONTACT</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    
+    <section id="hero" class="hero-section">
+        <div class="pixel-decoration top-left"></div>
+        <div class="pixel-decoration top-right"></div>
+        <div class="container">
+            <div class="hero">
+                <div class="retro-console">
+                    <div class="console-top-bar">
+                        <div class="power-button"></div>
+                        <div class="indicator-light"></div>
+                    </div>
+                    <div class="screen-frame">
+                        <div class="screen-scanlines"></div>
+                        <div class="screen-content">
+                            <h2 class="hero-title glitch" data-text="UNITY GAME DEVELOPER">UNITY GAME DEVELOPER</h2>
+                            <p class="hero-subtitle typing-text">PLAYER 1 - PRESS START</p>
+                            <div class="game-character">
+                                <div class="pixel-avatar"></div>
+                            </div>
+                            <div class="loading-bar"></div>
+                            <div class="button-container">
+                                <a href="#projects" class="btn btn-primary" role="button" tabindex="0"><span class="btn-icon">▶</span> VIEW GAMES</a>
+                                <a href="#contact" class="btn btn-outline" role="button" tabindex="0"><span class="btn-icon">✉️</span> CONTACT</a>
+                            </div>
+                        </div>
+                        <div class="screen-glare"></div>
+                    </div>
+                    <div class="console-controls">
+                        <div class="d-pad">
+                            <div class="d-up"></div>
+                            <div class="d-right"></div>
+                            <div class="d-down"></div>
+                            <div class="d-left"></div>
+                        </div>
+                        <div class="action-buttons">
+                            <div class="btn-a">A</div>
+                            <div class="btn-b">B</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pixel-decoration bottom-left"></div>
+        <div class="pixel-decoration bottom-right"></div>
+    </section>
+    
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">CHARACTER INFO</h2>
+            <div class="about-content">
+                <div class="character-profile">
+                    <div class="character-card pixel-border">
+                        <div class="character-header">
+                            <h3 class="character-name">JEMIN JOSEPH</h3>
+                            <span class="character-class">UNITY DEV</span>
+                        </div>
+                        <div class="about-img pixelated">
+                            <img src="/assets/images/jemin_1.png" alt="Jemin Joseph - Unity Game Developer">
+                        </div>
+                        <div class="character-attributes">
+                            <div class="attribute">
+                                <span class="attribute-name">STR</span>
+                                <span class="attribute-value">18</span>
+                            </div>
+                            <div class="attribute">
+                                <span class="attribute-name">INT</span>
+                                <span class="attribute-value">20</span>
+                            </div>
+                            <div class="attribute">
+                                <span class="attribute-name">DEX</span>
+                                <span class="attribute-value">16</span>
+                            </div>
+                            <div class="attribute">
+                                <span class="attribute-name">END</span>
+                                <span class="attribute-value">17</span>
+                            </div>
+                        </div>
+                        <div class="character-stats">
+                            <div class="stat">
+                                <span class="stat-name">UNITY</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 95%;"></div>
+                                </div>
+                                <span class="stat-value">95</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-name">C#</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 90%;"></div>
+                                </div>
+                                <span class="stat-value">90</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-name">GO</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 80%;"></div>
+                                </div>
+                                <span class="stat-value">80</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-name">NOSQL</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 75%;"></div>
+                                </div>
+                                <span class="stat-value">75</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="character-details">
+                    <div class="about-text">
+                        <h3 class="retro-title">PLAYER PROFILE</h3>
+                        <div class="text-box">
+                            <p>UNITY DEVELOPER WITH EXPERTISE IN OBJECT-ORIENTED PROGRAMMING AND CREATING ENGAGING GAMEPLAY EXPERIENCES.</p>
+                            <p>SPECIALIZED IN BUILDING BOTH 2D AND 3D GAMES WITH A FOCUS ON MULTIPLAYER FUNCTIONALITY.</p>
+                            <p>EXPERIENCED IN LEADING DEVELOPMENT TEAMS AND BUILDING IN-HOUSE GAME SERVERS USING GO LANGUAGE.</p>
+                        </div>
+                        
+                        <button class="backstory-toggle">CHARACTER BACKSTORY</button>
+                        <div class="character-backstory">
+                            <div class="text-box">
+                                <p>BEGAN PROGRAMMING JOURNEY IN COLLEGE, COMPLETING NUMEROUS GAME PROJECTS AND EARNING ACHIEVEMENTS IN GAME JAMS.</p>
+                                <p>LEVELED UP SKILLS THROUGH CONTINUOUS LEARNING AND PRACTICAL APPLICATION IN CHALLENGING GAME DEVELOPMENT QUESTS.</p>
+                                <p>CONSTANTLY EXPLORING NEW TECHNOLOGIES TO LEVEL UP GAME DEVELOPMENT SKILLS.</p>
+                            </div>
+                        </div>
+                        
+                        <h3 class="retro-title">SPECIAL ABILITIES</h3>
+                        <div class="skills">
+                            <span class="skill-tag">UNITY<span class="skill-level">95</span></span>
+                            <span class="skill-tag">C#<span class="skill-level">90</span></span>
+                            <span class="skill-tag">GO<span class="skill-level">80</span></span>
+                            <span class="skill-tag">NOSQL DB<span class="skill-level">75</span></span>
+                            <span class="skill-tag">AR<span class="skill-level">85</span></span>
+                            <span class="skill-tag">MULTIPLAYER<span class="skill-level">90</span></span>
+                            <span class="skill-tag">GAME PHYSICS<span class="skill-level">85</span></span>
+                            <span class="skill-tag">UI/UX<span class="skill-level">80</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">GAME COLLECTION</h2>
+            <div class="projects-grid">
+                <div class="project-card pixel-border">
+                    <div class="project-img">
+                        <img src="/assets/images/ar-baseball.png" alt="AR Basketball">
+                    </div>
+                    <div class="project-content">
+                        <h3>AR BASKETBALL</h3>
+                        <p>AUGMENTED REALITY BASKETBALL GAME THAT TRANSFORMS ANY FLAT SURFACE INTO A COURT. SHOOT HOOPS IN YOUR OWN ENVIRONMENT.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">UNITY</span>
+                            <span class="project-tag">AR</span>
+                            <span class="project-tag">C#</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn-mini">PLAY DEMO</a>
+                            <a href="#" class="btn-mini">DOWNLOAD</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card pixel-border">
+                    <div class="project-img">
+                        <img src="/assets/images/hexa-away.png" alt="Hexa Away">
+                    </div>
+                    <div class="project-content">
+                        <h3>HEXA AWAY</h3>
+                        <p>CHALLENGING PUZZLE GAME THAT TESTS STRATEGIC THINKING. NAVIGATE HEXAGONAL TILES TO SOLVE INCREASINGLY COMPLEX LEVELS.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">UNITY</span>
+                            <span class="project-tag">PUZZLE</span>
+                            <span class="project-tag">C#</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn-mini">PLAY DEMO</a>
+                            <a href="#" class="btn-mini">DOWNLOAD</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card pixel-border">
+                    <div class="project-img">
+                        <img src="/assets/images/park-n-roll.png" alt="Park N' Roll">
+                    </div>
+                    <div class="project-content">
+                        <h3>PARK N' ROLL</h3>
+                        <p>CASUAL PARKING SIMULATION WHERE PLAYERS NAVIGATE CARS INTO PARKING SPOTS WITHIN A TIME LIMIT. FEATURES CHALLENGING LAYOUTS.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">UNITY</span>
+                            <span class="project-tag">SIMULATION</span>
+                            <span class="project-tag">C#</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn-mini">PLAY DEMO</a>
+                            <a href="#" class="btn-mini">DOWNLOAD</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card pixel-border">
+                    <div class="project-img">
+                        <img src="/assets/images/board-game.png" alt="Multiplayer Board Game">
+                    </div>
+                    <div class="project-content">
+                        <h3>MULTIPLAYER BOARD GAME</h3>
+                        <p>DIGITAL ADAPTATION OF CLASSIC BOARD GAMES WITH REAL-TIME MULTIPLAYER. FEATURES CUSTOM MATCHMAKING AND PLAYER STATS.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">UNITY</span>
+                            <span class="project-tag">GO SERVER</span>
+                            <span class="project-tag">MULTIPLAYER</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#" class="btn-mini">PLAY ONLINE</a>
+                            <a href="#" class="btn-mini">DOWNLOAD</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="experience" class="section">
+        <div class="container">
+            <h2 class="section-title">QUEST LOG</h2>
+            <div class="quest-log-container">
+                <div class="quest-log-header">
+                    <div class="quest-tab active" data-year="all">ALL QUESTS</div>
+                    <div class="quest-tab" data-year="2025">2025</div>
+                    <div class="quest-tab" data-year="2024">2024</div>
+                    <div class="quest-tab" data-year="2023">2023</div>
+                    <div class="quest-tab" data-year="2020">2020</div>
+                </div>
+                
+                <div class="quest-log-screen">
+                    <div class="screen-scanlines"></div>
+                    <div class="experience-timeline">
+                        <div class="timeline-item" data-year="2025" data-xp="500">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content pixel-border">
+                                <div class="quest-header">
+                                    <div class="quest-level">LVL 4</div>
+                                    <div class="quest-title">
+                                        <h3>SLASHMATRIX INNOVATIONS</h3>
+                                        <h4>UNITY DEVELOPER | JAN 2025 - PRESENT</h4>
+                                    </div>
+                                    <div class="quest-status active">ACTIVE</div>
+                                </div>
+                                <div class="quest-description">
+                                    <p>Main quest: Create immersive gaming experiences for clients worldwide</p>
+                                </div>
+                                <ul class="quest-list">
+                                    <li class="completed">WORKING WITH DESIGN AND FRONTEND TEAMS</li>
+                                    <li class="in-progress">BUILDING 3D GAMES FOR CLIENT REQUIREMENTS</li>
+                                    <li class="upcoming">IMPLEMENT ADVANCED GAMEPLAY MECHANICS</li>
+                                </ul>
+                                <div class="quest-rewards">
+                                    <div class="reward">
+                                        <span class="reward-icon">⭐</span>
+                                        <span class="reward-value">Experience +15</span>
+                                    </div>
+                                    <div class="reward">
+                                        <span class="reward-icon">💰</span>
+                                        <span class="reward-value">Gold +500</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-year="2024" data-xp="350">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content pixel-border">
+                                <div class="quest-header">
+                                    <div class="quest-level">LVL 3</div>
+                                    <div class="quest-title">
+                                        <h3>RENXO TECHNOLOGIES</h3>
+                                        <h4>SOFTWARE DEV MANAGER | FEB 2024 - JAN 2025</h4>
+                                    </div>
+                                    <div class="quest-status completed">COMPLETED</div>
+                                </div>
+                                <div class="quest-description">
+                                    <p>Main quest: Lead team to deliver high-quality gaming experiences</p>
+                                </div>
+                                <ul class="quest-list">
+                                    <li class="completed">LED TEAM OF 8 DEVELOPERS [+30% DELIVERY SPEED]</li>
+                                    <li class="completed">DEVELOPED MULTIPLAYER SYSTEMS WITH GO SERVER</li>
+                                    <li class="completed">ESTABLISHED BEST PRACTICES [+20% PRODUCTIVITY]</li>
+                                </ul>
+                                <div class="quest-rewards">
+                                    <div class="reward">
+                                        <span class="reward-icon">⭐</span>
+                                        <span class="reward-value">Experience +25</span>
+                                    </div>
+                                    <div class="reward">
+                                        <span class="reward-icon">🏆</span>
+                                        <span class="reward-value">Leadership Badge</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-year="2023" data-xp="250">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content pixel-border">
+                                <div class="quest-header">
+                                    <div class="quest-level">LVL 2</div>
+                                    <div class="quest-title">
+                                        <h3>BROTOTYPE KOCHI</h3>
+                                        <h4>UNITY GAME DEVELOPMENT | FEB 2023 - JAN 2024</h4>
+                                    </div>
+                                    <div class="quest-status completed">COMPLETED</div>
+                                </div>
+                                <div class="quest-description">
+                                    <p>Main quest: Master Unity game development and gameplay systems</p>
+                                </div>
+                                <ul class="quest-list">
+                                    <li class="completed">MASTERED UNITY ENGINE [BUILT 8-10 GAMES]</li>
+                                    <li class="completed">DEVELOPED INNOVATIVE GAMEPLAY SYSTEMS</li>
+                                </ul>
+                                <div class="quest-rewards">
+                                    <div class="reward">
+                                        <span class="reward-icon">⭐</span>
+                                        <span class="reward-value">Experience +20</span>
+                                    </div>
+                                    <div class="reward">
+                                        <span class="reward-icon">🎮</span>
+                                        <span class="reward-value">Unity Mastery</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-item" data-year="2020" data-xp="150">
+                            <div class="timeline-dot"></div>
+                            <div class="timeline-content pixel-border">
+                                <div class="quest-header">
+                                    <div class="quest-level">LVL 1</div>
+                                    <div class="quest-title">
+                                        <h3>SAHRDAYA COLLEGE</h3>
+                                        <h4>B.TECH IN CS & ENGINEERING | 2016 - 2020</h4>
+                                    </div>
+                                    <div class="quest-status completed">COMPLETED</div>
+                                </div>
+                                <div class="quest-description">
+                                    <p>Main quest: Acquire fundamental knowledge in computer science</p>
+                                </div>
+                                <ul class="quest-list">
+                                    <li class="completed">ACQUIRED KNOWLEDGE IN ALGORITHMS & DATA STRUCTURES</li>
+                                    <li class="completed">COMPLETED DATABASE MANAGEMENT TRAINING</li>
+                                </ul>
+                                <div class="quest-rewards">
+                                    <div class="reward">
+                                        <span class="reward-icon">⭐</span>
+                                        <span class="reward-value">Experience +10</span>
+                                    </div>
+                                    <div class="reward">
+                                        <span class="reward-icon">🎓</span>
+                                        <span class="reward-value">B.Tech Degree</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="xp-label">XP: 1250 / 2000</div>
+                        <div class="xp-progress">
+                            <div class="xp-fill"></div>
+                        </div>
+                        <div class="player-level">LEVEL 2 - SOFTWARE DEVELOPER</div>
+                        <button id="refresh-xp" onclick="updateXpProgress(); return false;" class="pixel-border refresh-button">REFRESH XP</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact section">
+        <div class="container">
+            <h2 class="section-title">SEND MESSAGE</h2>
+            <div class="contact-content">
+                <div class="contact-decoration top-left"></div>
+                <div class="contact-decoration top-right"></div>
+                <div class="contact-decoration bottom-left"></div>
+                <div class="contact-decoration bottom-right"></div>
+                
+                <p class="contact-intro">READY TO START A NEW QUEST? DROP A MESSAGE BELOW!</p>
+                
+                <div class="contact-info">
+                    <h3 class="retro-title">CONTACT DETAILS</h3>
+                    <div class="contact-items-container">
+                        <div class="contact-item pixel-border">
+                            <div class="contact-icon">@</div>
+                            <div class="contact-details">
+                                <span class="contact-label">EMAIL</span>
+                                <span class="contact-value email-value">jeminjosephpvt@gmail.com</span>
+                            </div>
+                            <div class="contact-item-hover-effect"></div>
+                        </div>
+                        <div class="contact-item pixel-border">
+                            <div class="contact-icon">☎</div>
+                            <div class="contact-details">
+                                <span class="contact-label">PHONE</span>
+                                <span class="contact-value">+91 8138817341</span>
+                            </div>
+                            <div class="contact-item-hover-effect"></div>
+                        </div>
+                        <div class="contact-item pixel-border">
+                            <div class="contact-icon">⌂</div>
+                            <div class="contact-details">
+                                <span class="contact-label">LOCATION</span>
+                                <span class="contact-value">KERALA, INDIA</span>
+                            </div>
+                            <div class="contact-item-hover-effect"></div>
+                        </div>
+                        <div class="contact-item pixel-border">
+                            <div class="contact-icon">⌨</div>
+                            <div class="contact-details">
+                                <span class="contact-label">DISCORD</span>
+                                <span class="contact-value">jeminjoseph#1234</span>
+                            </div>
+                            <div class="contact-item-hover-effect"></div>
+                        </div>
+                    </div>
+                    <div class="power-level">
+                        <div class="power-label">RESPONSE TIME</div>
+                        <div class="power-meter">
+                            <div class="power-fill" style="width: 85%;"></div>
+                        </div>
+                        <div class="power-value">QUICK</div>
+                    </div>
+                </div>
+                
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="YOUR NAME" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" class="form-control" placeholder="YOUR EMAIL" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="YOUR MESSAGE" required></textarea>
+                    </div>
+                    <button type="submit" class="btn">SEND MESSAGE</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://github.com/jemin-joseph" class="social-link" target="_blank">GH</a>
+                <a href="https://linkedin.com/in/jemin-joseph" class="social-link" target="_blank">LI</a>
+                <a href="https://twitter.com/jeminjoseph" class="social-link" target="_blank">TW</a>
+            </div>
+            <p>© 2025 JEMIN JOSEPH | ALL RIGHTS RESERVED</p>
+            <p class="footer-credits">INSERT COIN TO CONTINUE</p>
+        </div>
+    </footer>
+    
+    <script src="assets/js/script.js"></script>
+</body>
+</html>
