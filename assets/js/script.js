@@ -65,20 +65,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set up a series of XP progress bar initializations with increasing delays
     // This helps ensure it's properly initialized even if the DOM is slow to render
     setTimeout(updateXpProgress, 200);
-    setTimeout(updateXpProgress, 500);
     setTimeout(updateXpProgress, 1000);
-    setTimeout(updateXpProgress, 2000);
     
-    // Initialize response time power meter with multiple attempts for reliability
-    setTimeout(initResponseTimePowerMeter, 200);
-    setTimeout(initResponseTimePowerMeter, 500);
-    setTimeout(initResponseTimePowerMeter, 1000);
+    // Initialize response time power meter just once on page load
+    // Additional initializations will happen when the user scrolls to the contact section
     setTimeout(initResponseTimePowerMeter, 2000);
     
     // Also initialize when user interacts with the page
     document.addEventListener('click', function() {
         setTimeout(updateXpProgress, 100);
-        setTimeout(initResponseTimePowerMeter, 100);
     }, { once: true });
 });
 
@@ -487,9 +482,12 @@ function setupNavigation() {
                 
                 // If we're navigating to the contact section, initialize the RESPONSE TIME meter
                 if (targetId === 'contact') {
-                    setTimeout(() => {
-                        initResponseTimePowerMeter();
-                    }, 1000);
+                    // Use the global flag to prevent multiple initializations
+                    if (!powerMeterInitializing) {
+                        setTimeout(() => {
+                            initResponseTimePowerMeter();
+                        }, 1000);
+                    }
                 }
             }
         });
@@ -521,9 +519,12 @@ function setupScrollAnimations() {
                 
                 // If the contact section comes into view, initialize the RESPONSE TIME meter
                 if (entry.target.id === 'contact') {
-                    setTimeout(() => {
-                        initResponseTimePowerMeter();
-                    }, 500);
+                    // Use the global flag to prevent multiple initializations
+                    if (!powerMeterInitializing) {
+                        setTimeout(() => {
+                            initResponseTimePowerMeter();
+                        }, 500);
+                    }
                 }
                 
                 // Update navigation is handled separately by updateActiveNavOnScroll
@@ -1228,19 +1229,27 @@ function setupContactItemInteractions() {
         });
     });
     
-    // Initialize power meter with multiple attempts for reliability
-    initResponseTimePowerMeter();
-    
-    // Set up repeated attempts to initialize the power meter for a short period
-    for (let i = 1; i <= 5; i++) {
-        setTimeout(initResponseTimePowerMeter, i * 500);
-    }
+    // Initialize power meter just once here, further initializations will be handled by the observer
+    setTimeout(initResponseTimePowerMeter, 500);
     
     // Also set up a mutation observer to detect if the contact section changes
     const contactSection = document.getElementById('contact');
     if (contactSection) {
+        // Add flag to track if power meter is currently being initialized
+        let isInitializingPowerMeter = false;
+        
         const observer = new MutationObserver(() => {
-            initResponseTimePowerMeter();
+            // Only call initResponseTimePowerMeter if it's not already running
+            if (!isInitializingPowerMeter) {
+                isInitializingPowerMeter = true;
+                setTimeout(() => {
+                    initResponseTimePowerMeter();
+                    // Reset flag after a small delay to prevent immediate re-triggering
+                    setTimeout(() => {
+                        isInitializingPowerMeter = false;
+                    }, 100);
+                }, 50);
+            }
         });
         
         observer.observe(contactSection, { 
@@ -1252,9 +1261,16 @@ function setupContactItemInteractions() {
 }
 
 // Initialize and animate the RESPONSE TIME power meter
+let powerMeterInitializing = false; // Add a global flag to prevent concurrent initializations
 function initResponseTimePowerMeter() {
+    // Skip if already initializing
+    if (powerMeterInitializing) return;
+    
     const powerFill = document.querySelector('.power-fill');
     if (!powerFill) return;
+    
+    // Set flag to prevent concurrent initializations
+    powerMeterInitializing = true;
     
     console.log('Initializing response time power meter');
     
@@ -1286,7 +1302,7 @@ function initResponseTimePowerMeter() {
         
         // Approach 2: CSS animation class as fallback
         powerFill.classList.remove('power-fill-animate');
-        void powerFill.offsetWidth; // Force reflow
+        void powerFill.offsetHeight; // Force reflow
         powerFill.classList.add('power-fill-animate');
     }
     
@@ -1297,6 +1313,11 @@ function initResponseTimePowerMeter() {
             powerFill.style.transition = 'none';
             powerFill.style.width = targetWidth + '%';
         }
+        
+        // Reset the initialization flag after animation is complete
+        setTimeout(() => {
+            powerMeterInitializing = false;
+        }, 500);
     }, 2000);
 }
 
