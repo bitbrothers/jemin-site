@@ -440,43 +440,49 @@ function playRetroStartup() {
     }, 5000);
 }
 
-// Setup navigation
+// Handle navigation click events
 function setupNavigation() {
     const navLinks = document.querySelectorAll('.nav-links a');
-    const headerHeight = document.getElementById('header').offsetHeight;
     
-    // Add hover effects to all nav items
-    const navItems = document.querySelectorAll('.nav-item');
-    navItems.forEach(item => {
-        item.addEventListener('mouseenter', () => {
-            playSound('hover');
-        });
-    });
-    
-    // Handle click navigation and sounds
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             
-            // Play retro click sound
+            // Play sound effect
             playSound('click');
             
-            const targetId = this.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
             
-            if (targetSection) {
-                // Account for fixed header when scrolling
-                const targetPosition = targetSection.offsetTop - headerHeight;
-            
+            if (targetElement) {
+                // Remove active class from all links
+                navLinks.forEach(navLink => navLink.classList.remove('active'));
+                
+                // Add active class to clicked link
+                this.classList.add('active');
+                
+                // Add some spacing to account for fixed header
+                const offset = document.querySelector('.fixed-header').offsetHeight + 20;
+                const targetPosition = targetElement.offsetTop - offset;
+                
+                // Smooth scroll to target
                 window.scrollTo({
                     top: targetPosition,
                     behavior: 'smooth'
                 });
                 
-                // Update active class
-                navLinks.forEach(link => link.classList.remove('active'));
-                this.classList.add('active');
+                // If we're navigating to the experience section, make sure XP is updated
+                if (targetId === 'experience') {
+                    setTimeout(() => {
+                        updateXpProgress();
+                    }, 1000);
+                }
             }
+        });
+        
+        // Add hover sound effect to navigation links
+        link.addEventListener('mouseenter', () => {
+            playSound('hover');
         });
     });
 }
@@ -491,6 +497,13 @@ function setupScrollAnimations() {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('active');
+                
+                // If the experience section comes into view, update XP
+                if (entry.target.id === 'experience') {
+                    setTimeout(() => {
+                        updateXpProgress();
+                    }, 500);
+                }
                 
                 // Update navigation is handled separately by updateActiveNavOnScroll
             }
@@ -704,8 +717,10 @@ function setupQuestLog() {
                 }
             });
             
-            // Update XP progress after filtering
-            updateXpProgress();
+            // Update XP progress after filtering with a slight delay to ensure animations complete
+            setTimeout(() => {
+                updateXpProgress();
+            }, 350);
         });
         
         // Add hover sound effect
@@ -766,6 +781,34 @@ function setupQuestLog() {
             card.style.transform = '';
         });
     });
+    
+    // Also ensure XP is updated when tab change via another method (e.g. from URL)
+    observeTabChanges();
+}
+
+// Function to observe tab changes using MutationObserver
+function observeTabChanges() {
+    const tabContainer = document.querySelector('.quest-log-header');
+    if (tabContainer) {
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === 'attributes' && 
+                    mutation.attributeName === 'class' && 
+                    mutation.target.classList.contains('quest-tab')) {
+                    // A tab's class changed - update XP
+                    setTimeout(() => {
+                        updateXpProgress();
+                    }, 350);
+                }
+            });
+        });
+        
+        observer.observe(tabContainer, {
+            attributes: true,
+            subtree: true,
+            attributeFilter: ['class']
+        });
+    }
 }
 
 // Calculate and update XP progress
